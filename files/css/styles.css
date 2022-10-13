@@ -6,6 +6,10 @@ main {
   justify-content: center;
   text-align: center;
   padding: 10px;
+  flex-direction: column;
+}
+img{
+  max-width: 100px;
 }
 /* .col {
 max-width: 50%;
