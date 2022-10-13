@@ -1,0 +1,13 @@
+* {
+  border: 1px solid black;
+}
+main {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+/* .col {
+max-width: 50%;
+margin: 10px;
+} */
