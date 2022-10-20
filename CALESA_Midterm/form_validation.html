@@ -12,15 +12,13 @@
     <title>Form Validation Page</title>
     <style>
       * {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         /* border: 1px solid black; */
       }
       main {
         height: auto;
         background-color: #ffff;
         color: #000;
-      }
-      p {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
       button#submit-btn {
         border: 1px solid #eaeaea;
@@ -36,46 +34,64 @@
           <div class="form-group">
             <label for="name">First Name:</label>
             <input type="text" class="form-control" id="name" required />
-            <div class="empty-feedback-fn" style="color: red">
+            <div class="empty-feedback-fn" style="color: #c30010">
               Please input something.
             </div>
-            <div class="invalid-feedback-fn" style="color: red">
-              Invalid Input.
+            <div class="invalid-feedback-fn" style="color: #c30010">
+              Please enter a valid name.
             </div>
           </div>
           <div class="form-group">
             <label for="surname">Last Name:</label>
             <input type="text" class="form-control" id="surname" />
-            <div class="empty-feedback-fn" style="color: red">
+            <div class="empty-feedback-ln" style="color: #c30010">
               Please input something.
             </div>
-            <div class="invalid-feedback-ln" style="color: red">
-              Invalid Input.
+            <div class="invalid-feedback-ln" style="color: #c30010">
+              Please enter a valid name.
             </div>
           </div>
           <div class="form-group">
             <label for="email">Email address:</label>
             <input type="email" class="form-control" id="email" />
-            <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Please fill out this field.</div>
+            <div class="empty-feedback-em" style="color: #c30010">
+              Please input something.
+            </div>
+            <div class="invalid-feedback-em" style="color: #c30010">
+              Please enter a valid email.
+            </div>
           </div>
           <div class="form-group">
             <label for="birthday">Birthdate:</label>
             <input type="date" class="form-control" id="birthday" />
-            <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Please fill out this field.</div>
+            <div class="empty-feedback-bd" style="color: #c30010">
+              Please input something.
+            </div>
+            <div class="invalid-feedback-bd" style="color: #c30010">
+              You must be 18 years old and above to create an account.
+            </div>
           </div>
           <div class="form-group">
             <label for="number">Phone Number:</label>
             <input type="tel" class="form-control" id="number" />
-            <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Please fill out this field.</div>
+            <div class="empty-feedback-num" style="color: #c30010">
+              Please input something.
+            </div>
+            <div class="invalid-feedback-num" style="color: #c30010">
+              Please enter a valid phone number.
+            </div>
           </div>
           <div class="form-group">
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd" />
-            <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Please fill out this field.</div>
+            <div class="empty-feedback-pw" style="color: #c30010">
+              Please input something.
+            </div>
+            <div class="invalid-feedback-pw" style="color: #c30010">
+              “Your password must have 8 characters or more, and contain at
+              least one special character, number, uppercase letter, and
+              lowercase letter.”
+            </div>
           </div>
           <div class="checkbox">
             <label><input type="checkbox" /> Remember me</label>
@@ -89,11 +105,19 @@
     </main>
     <script>
       $(document).ready(function () {
-        // validate the firstname
+        // initiate all variables
         $(".empty-feedback-fn").hide();
-        $(".invalid-feedback-fn").hide();
         $(".empty-feedback-ln").hide();
+        $(".empty-feedback-bd").hide();
+        $(".empty-feedback-em").hide();
+        $(".empty-feedback-num").hide();
+        $(".empty-feedback-pw").hide();
+        $(".invalid-feedback-fn").hide();
         $(".invalid-feedback-ln").hide();
+        $(".invalid-feedback-bd").hide();
+        $(".invalid-feedback-em").hide();
+        $(".invalid-feedback-num").hide();
+        $(".invalid-feedback-pw").hide();
         let specialchars = /^[A-Z,a-z,.]+$/;
         let specialcharsboo = true;
         let firstnameError = true;
@@ -101,20 +125,25 @@
         $("#name").keyup(function () {
           validationFirstName();
         });
-        $("#surname").keyup(function () {
+        $("#surname").on("blur", function () {
           validationLastName();
         });
-
+        $("#birthday").on("blur", function () {
+          validationBirthday();
+        });
+        // function for the firstname validation
         function validationFirstName() {
           let valueFN = $("#name").val();
           if (valueFN.length == "") {
             $(".empty-feedback-fn").show();
             $(".invalid-feedback-fn").hide();
+            $("#name").css("border", "1px solid red");
             firstnameError = false;
             return false;
           } else if (specialchars.test(valueFN) == false) {
             $(".invalid-feedback-fn").show();
             $(".empty-feedback-fn").hide();
+            $("#name").css("border", "1px solid red");
             specialcharsboo = false;
             return false;
           } else {
@@ -122,21 +151,41 @@
             $(".invalid-feedback-fn").hide();
           }
         }
+        // function for the lastname validation
         function validationLastName() {
           let valueLN = $("#surname").val();
           if (valueLN.length == "") {
             $(".empty-feedback-ln").show();
             $(".invalid-feedback-ln").hide();
+            $("#surname").css("border", "1px solid red");
             lastnameError = false;
             return false;
           } else if (specialchars.test(valueLN) == false) {
             $(".invalid-feedback-ln").show();
             $(".empty-feedback-ln").hide();
+            $("#surname").css("border", "1px solid red");
             specialcharsboo = false;
             return false;
           } else {
             $(".empty-feedback-ln").hide();
             $(".invalid-feedback-ln").hide();
+          }
+        }
+        // function for the password
+        // function for the birthdate
+        function validationBirthday() {
+          let today = new Date();
+          let birthDate = new Date($("#birthday").val());
+          let age = today.getFullYear() - birthDate.getFullYear();
+          if (age <= 18) {
+            $(".invalid-feedback-bd").show();
+            $("#birthday").css("border", "1px solid red");
+          } else if (birthDate.length == "") {
+            $(".empty-feedback-bd").show();
+            $("#birthday").css("border", "1px solid red");
+          } else {
+            $(".invalid-feedback-bd").hide();
+            $("#birthday").css("border", "1px solid green");
           }
         }
       });
