@@ -83,7 +83,13 @@
           </div>
           <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" />
+            <input
+              type="password"
+              class="form-control"
+              pattern="(?=.*\D)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              id="pwd"
+              required
+            />
             <div class="empty-feedback-pw" style="color: #c30010">
               Please input something.
             </div>
@@ -119,17 +125,25 @@
         $(".invalid-feedback-num").hide();
         $(".invalid-feedback-pw").hide();
         let specialchars = /^[A-Z,a-z,.]+$/;
+        let specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
         let specialcharsboo = true;
         let firstnameError = true;
         let lastnameError = true;
         $("#name").keyup(function () {
           validationFirstName();
         });
-        $("#surname").on("blur", function () {
+        $("#surname").keyup(function () {
           validationLastName();
         });
         $("#birthday").on("blur", function () {
           validationBirthday();
+        });
+        $("#pwd").keyup(function () {
+          validationPassword();
+        });
+
+        $("#submit-btn").on("click", function () {
+          validationPassword();
         });
         // function for the firstname validation
         function validationFirstName() {
@@ -172,6 +186,21 @@
           }
         }
         // function for the password
+        function validationPassword() {
+          let password = $("#pwd").val();
+          if (password.length == "") {
+            $(".empty-feedback-pw").show();
+            $(".invalid-feedback-pw").hide();
+            $("#surname").css("border", "1px solid red");
+          } else if (specialChars.test(password) == false || password>8 ) {
+            $(".invalid-feedback-pw").show();
+            $(".empty-feedback-pw").hide();
+            $("#surname").css("border", "1px solid red");
+          } else {
+            $(".empty-feedback-pw").hide();
+            $(".invalid-feedback-pw").hide();
+          }
+        }
         // function for the birthdate
         function validationBirthday() {
           let today = new Date();
@@ -180,7 +209,7 @@
           if (age <= 18) {
             $(".invalid-feedback-bd").show();
             $("#birthday").css("border", "1px solid red");
-          } else if (birthDate.length == "") {
+          } else if ("dd/mm/yy") {
             $(".empty-feedback-bd").show();
             $("#birthday").css("border", "1px solid red");
           } else {
