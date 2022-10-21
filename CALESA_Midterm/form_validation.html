@@ -86,7 +86,7 @@
             <input
               type="password"
               class="form-control"
-              pattern="(?=.*\D)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}"
               id="pwd"
               required
             />
@@ -124,11 +124,16 @@
         $(".invalid-feedback-em").hide();
         $(".invalid-feedback-num").hide();
         $(".invalid-feedback-pw").hide();
-        let specialchars = /^[A-Z,a-z,.]+$/;
-        let specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        let pwdUpper = /[A-Z]+/;
+        let pwdLower = /[a-z]+/;
+        let pwdNumber = /[0-9]+/;
+        let pwdSpecial = /[!@#$%^&()'[\]"?+-/*={}.,;:_]+/;
+        let validRegex =
+          /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         let specialcharsboo = true;
         let firstnameError = true;
         let lastnameError = true;
+        let emailError = true;
         $("#name").keyup(function () {
           validationFirstName();
         });
@@ -141,9 +146,12 @@
         $("#pwd").keyup(function () {
           validationPassword();
         });
-
+        $("#email").keyup(function () {
+          validationEmail();
+        });
         $("#submit-btn").on("click", function () {
           validationPassword();
+          validationEmail();
         });
         // function for the firstname validation
         function validationFirstName() {
@@ -191,11 +199,20 @@
           if (password.length == "") {
             $(".empty-feedback-pw").show();
             $(".invalid-feedback-pw").hide();
-            $("#surname").css("border", "1px solid red");
-          } else if (specialChars.test(password) == false || password>8 ) {
+            $("#pwd").css("border", "1px solid red");
+          } else if (password.length <= 8) {
             $(".invalid-feedback-pw").show();
             $(".empty-feedback-pw").hide();
-            $("#surname").css("border", "1px solid red");
+            $("#pwd").css("border", "1px solid red");
+          } else if (
+            pwdUpper.test(password) &&
+            pwdLower.test(password) &&
+            pwdNumber.test(password) &&
+            pwdSpecial.test(password) == false
+          ) {
+            $(".invalid-feedback-pw").show();
+            $(".empty-feedback-pw").hide();
+            $("#pwd").css("border", "1px solid red");
           } else {
             $(".empty-feedback-pw").hide();
             $(".invalid-feedback-pw").hide();
@@ -217,6 +234,32 @@
             $("#birthday").css("border", "1px solid green");
           }
         }
+        // function for email
+        function validationEmail() {
+          let emailInput = $("#email").val();
+          if (emailInput.value.match(validRegex)) {
+            alert("Valid email address!");
+            return true;
+          } else {
+            alert("Invalid email address!");
+            return false;
+          }
+        
+          // if (emailInput.length == "") {
+          //   $(".empty-feedback-em").show();
+          //   $(".invalid-feedback-em").hide();
+          //   $("#email").css("border", "1px solid red");
+          // } else if (emailInput.test(emailRegex) == true) {
+          //   $(".invalid-feedback-em").show();
+          //   $(".empty-feedback-em").hide();
+          //   $("#email").css("border", "1px solid red");
+            // } else {
+            //   $(".empty-feedback-em").hide();
+            //   $(".invalid-feedback-em").hide();
+            // }
+          // }
+        }
+        // function phone
       });
     </script>
   </body>
