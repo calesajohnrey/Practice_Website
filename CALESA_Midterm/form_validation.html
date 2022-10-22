@@ -53,7 +53,7 @@
           </div>
           <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email" />
+            <input type="email" class="form-control" id="email" pattern=".+]" />
             <div class="empty-feedback-em" style="color: #c30010">
               Please input something.
             </div>
@@ -128,8 +128,7 @@
         let pwdLower = /[a-z]+/;
         let pwdNumber = /[0-9]+/;
         let pwdSpecial = /[!@#$%^&()'[\]"?+-/*={}.,;:_]+/;
-        let validRegex =
-          /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{4,})+$/;
         let specialcharsboo = true;
         let firstnameError = true;
         let lastnameError = true;
@@ -237,14 +236,17 @@
         // function for email
         function validationEmail() {
           let emailInput = $("#email").val();
-          if (emailInput.value.match(validRegex)) {
-            alert("Valid email address!");
+          if (emailInput.match(validRegex)) {
+            $(".invalid-feedback-em").show();
+            $(".empty-feedback-em").hide();
+            $("#email").css("border", "1px solid red");
             return true;
           } else {
-            alert("Invalid email address!");
+            $(".invalid-feedback-em").hide();
+            $("#email").css("border", "1px solid green");
             return false;
           }
-        
+
           // if (emailInput.length == "") {
           //   $(".empty-feedback-em").show();
           //   $(".invalid-feedback-em").hide();
@@ -253,13 +255,26 @@
           //   $(".invalid-feedback-em").show();
           //   $(".empty-feedback-em").hide();
           //   $("#email").css("border", "1px solid red");
-            // } else {
-            //   $(".empty-feedback-em").hide();
-            //   $(".invalid-feedback-em").hide();
-            // }
+          // } else {
+          //   $(".empty-feedback-em").hide();
+          //   $(".invalid-feedback-em").hide();
+          // }
           // }
         }
         // function phone
+        // function validationEmail() {
+        //   let emailInput = $("#email").val();
+        //   if (emailInput.match(validRegex)) {
+        //     $(".invalid-feedback-em").show();
+        //     $(".empty-feedback-em").hide();
+        //     $("#email").css("border", "1px solid red");
+        //     return true;
+        //   } else {
+        //     $(".invalid-feedback-em").hide();
+        //     $("#email").css("border", "1px solid green");
+        //     return false;
+        //   }
+        // }
       });
     </script>
   </body>
