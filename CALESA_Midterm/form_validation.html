@@ -25,6 +25,116 @@
         margin: 10px;
       }
     </style>
+    <script>
+      $(document).ready(function () {
+        // initiate all variables
+
+        $("#name").keyup(function () {
+          validationFirstName();
+        });
+        $("#surname").keyup(function () {
+          validationLastName();
+        });
+        $("#birthday").focusout(function () {
+          validationBirthday();
+        });
+        $("#pwd").keyup(function () {
+          validationPassword();
+        });
+        $("#email").keyup(function () {
+          validationEmail();
+        });
+                $("#number").keyup(function () {
+          validationPhone();
+        });
+        $("#submit-btn").on("click", function () {
+          validationFirstName();
+          validationLastName();
+          validationBirthday();
+          validationPassword();
+          validationEmail();
+        });
+        // function for the firstname validation
+        function validationFirstName() {
+          let valueFN = $("#name").val();
+          let letters = /^[A-Za-z, ]+$/;
+          if (!valueFN.match(letters) || valueFN.length == "") {
+            $("#name").css("border", "1px solid red");
+            return false;
+          } else {
+            $("#name").css("border", "1px solid green");
+            return true;
+          }
+        }
+
+        // function for the lastname validation
+        function validationLastName() {
+          let valueLN = $("#surname").val();
+          let letters = /^[A-Za-z, ,.]+$/;
+          if (!valueLN.match(letters) || valueLN.length == "") {
+            $("#surname").css("border", "1px solid red");
+            return false;
+          } else {
+            $("#surname").css("border", "1px solid green");
+            return true;
+          }
+        }
+        // function for the password
+        function validationPassword() {
+          let valuepw = $("#pwd").val();
+          let letters =
+            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+          if (!valuepw.match(letters) || valuepw.length == "") {
+            $("#pwd").css("border", "1px solid red");
+            return false;
+          } else {
+            $("#pwd").css("border", "1px solid green");
+            return true;
+          }
+        }
+        // function for the birthdate
+        function validationBirthday() {
+          let birthDate = new Date($("#birthday").val());
+          let today = new Date();
+          let age = today.getFullYear() - birthDate.getFullYear();
+          if (age >= 18 || birthDate.value) {
+            $("#birthday").css("border", "1px solid green");
+            return true;
+          } else {
+            $("#birthday").css("border", "1px solid red");
+            return false;
+          }
+        }
+        // function for email
+        function validationEmail() {
+          let emailInput = $("#email").val();
+          let letters = /^[A-Za-z, ,.]+$/;
+          if (
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{4,})+$/g.test(emailInput) ||
+            emailInput.length == ""
+          ) {
+            $("#email").css("border", "1px solid red");
+            return false;
+          } else {
+            $("#email").css("border", "1px solid green");
+            return true;
+          }
+        }
+        // function for phone
+        function validationPhone() {
+          let valuePhone = $("#number").val();
+          let letters =
+            /((\+[0-9]{2})|0)[.\- ]?9[0-9]{2}[.\- ]?[0-9]{3}[.\- ]?[0-9]{4}/;
+          if (!valuePhone.match(letters) || valuePhone.length == "") {
+            $("#number").css("border", "1px solid red");
+            return false;
+          } else {
+            $("#number").css("border", "1px solid green");
+            return true;
+          }
+        }
+      });
+    </script>
   </head>
   <body>
     <main>
@@ -33,53 +143,23 @@
         <form>
           <div class="form-group">
             <label for="name">First Name:</label>
-            <input type="text" class="form-control" id="name" required />
-            <div class="empty-feedback-fn" style="color: #c30010">
-              Please input something.
-            </div>
-            <div class="invalid-feedback-fn" style="color: #c30010">
-              Please enter a valid name.
-            </div>
+            <input type="text" class="form-control" id="name" />
           </div>
           <div class="form-group">
             <label for="surname">Last Name:</label>
-            <input type="text" class="form-control" id="surname" />
-            <div class="empty-feedback-ln" style="color: #c30010">
-              Please input something.
-            </div>
-            <div class="invalid-feedback-ln" style="color: #c30010">
-              Please enter a valid name.
-            </div>
+            <input type="text" class="form-control" id="surname" required />
           </div>
           <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email" pattern=".+]" />
-            <div class="empty-feedback-em" style="color: #c30010">
-              Please input something.
-            </div>
-            <div class="invalid-feedback-em" style="color: #c30010">
-              Please enter a valid email.
-            </div>
+            <input type="email" class="form-control" id="email" required />
           </div>
           <div class="form-group">
             <label for="birthday">Birthdate:</label>
-            <input type="date" class="form-control" id="birthday" />
-            <div class="empty-feedback-bd" style="color: #c30010">
-              Please input something.
-            </div>
-            <div class="invalid-feedback-bd" style="color: #c30010">
-              You must be 18 years old and above to create an account.
-            </div>
+            <input type="date" class="form-control" id="birthday" required />
           </div>
           <div class="form-group">
             <label for="number">Phone Number:</label>
-            <input type="tel" class="form-control" id="number" />
-            <div class="empty-feedback-num" style="color: #c30010">
-              Please input something.
-            </div>
-            <div class="invalid-feedback-num" style="color: #c30010">
-              Please enter a valid phone number.
-            </div>
+            <input type="tel" class="form-control" id="number" required />
           </div>
           <div class="form-group">
             <label for="pwd">Password:</label>
@@ -90,14 +170,6 @@
               id="pwd"
               required
             />
-            <div class="empty-feedback-pw" style="color: #c30010">
-              Please input something.
-            </div>
-            <div class="invalid-feedback-pw" style="color: #c30010">
-              “Your password must have 8 characters or more, and contain at
-              least one special character, number, uppercase letter, and
-              lowercase letter.”
-            </div>
           </div>
           <div class="checkbox">
             <label><input type="checkbox" /> Remember me</label>
@@ -109,173 +181,5 @@
         </form>
       </div>
     </main>
-    <script>
-      $(document).ready(function () {
-        // initiate all variables
-        $(".empty-feedback-fn").hide();
-        $(".empty-feedback-ln").hide();
-        $(".empty-feedback-bd").hide();
-        $(".empty-feedback-em").hide();
-        $(".empty-feedback-num").hide();
-        $(".empty-feedback-pw").hide();
-        $(".invalid-feedback-fn").hide();
-        $(".invalid-feedback-ln").hide();
-        $(".invalid-feedback-bd").hide();
-        $(".invalid-feedback-em").hide();
-        $(".invalid-feedback-num").hide();
-        $(".invalid-feedback-pw").hide();
-        let pwdUpper = /[A-Z]+/;
-        let pwdLower = /[a-z]+/;
-        let pwdNumber = /[0-9]+/;
-        let pwdSpecial = /[!@#$%^&()'[\]"?+-/*={}.,;:_]+/;
-        var validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{4,})+$/;
-        let specialcharsboo = true;
-        let firstnameError = true;
-        let lastnameError = true;
-        let emailError = true;
-        $("#name").keyup(function () {
-          validationFirstName();
-        });
-        $("#surname").keyup(function () {
-          validationLastName();
-        });
-        $("#birthday").on("blur", function () {
-          validationBirthday();
-        });
-        $("#pwd").keyup(function () {
-          validationPassword();
-        });
-        $("#email").keyup(function () {
-          validationEmail();
-        });
-        $("#submit-btn").on("click", function () {
-          validationPassword();
-          validationEmail();
-        });
-        // function for the firstname validation
-        function validationFirstName() {
-          let valueFN = $("#name").val();
-          if (valueFN.length == "") {
-            $(".empty-feedback-fn").show();
-            $(".invalid-feedback-fn").hide();
-            $("#name").css("border", "1px solid red");
-            firstnameError = false;
-            return false;
-          } else if (specialchars.test(valueFN) == false) {
-            $(".invalid-feedback-fn").show();
-            $(".empty-feedback-fn").hide();
-            $("#name").css("border", "1px solid red");
-            specialcharsboo = false;
-            return false;
-          } else {
-            $(".empty-feedback-fn").hide();
-            $(".invalid-feedback-fn").hide();
-          }
-        }
-        // function for the lastname validation
-        function validationLastName() {
-          let valueLN = $("#surname").val();
-          if (valueLN.length == "") {
-            $(".empty-feedback-ln").show();
-            $(".invalid-feedback-ln").hide();
-            $("#surname").css("border", "1px solid red");
-            lastnameError = false;
-            return false;
-          } else if (specialchars.test(valueLN) == false) {
-            $(".invalid-feedback-ln").show();
-            $(".empty-feedback-ln").hide();
-            $("#surname").css("border", "1px solid red");
-            specialcharsboo = false;
-            return false;
-          } else {
-            $(".empty-feedback-ln").hide();
-            $(".invalid-feedback-ln").hide();
-          }
-        }
-        // function for the password
-        function validationPassword() {
-          let password = $("#pwd").val();
-          if (password.length == "") {
-            $(".empty-feedback-pw").show();
-            $(".invalid-feedback-pw").hide();
-            $("#pwd").css("border", "1px solid red");
-          } else if (password.length <= 8) {
-            $(".invalid-feedback-pw").show();
-            $(".empty-feedback-pw").hide();
-            $("#pwd").css("border", "1px solid red");
-          } else if (
-            pwdUpper.test(password) &&
-            pwdLower.test(password) &&
-            pwdNumber.test(password) &&
-            pwdSpecial.test(password) == false
-          ) {
-            $(".invalid-feedback-pw").show();
-            $(".empty-feedback-pw").hide();
-            $("#pwd").css("border", "1px solid red");
-          } else {
-            $(".empty-feedback-pw").hide();
-            $(".invalid-feedback-pw").hide();
-          }
-        }
-        // function for the birthdate
-        function validationBirthday() {
-          let today = new Date();
-          let birthDate = new Date($("#birthday").val());
-          let age = today.getFullYear() - birthDate.getFullYear();
-          if (age <= 18) {
-            $(".invalid-feedback-bd").show();
-            $("#birthday").css("border", "1px solid red");
-          } else if ("dd/mm/yy") {
-            $(".empty-feedback-bd").show();
-            $("#birthday").css("border", "1px solid red");
-          } else {
-            $(".invalid-feedback-bd").hide();
-            $("#birthday").css("border", "1px solid green");
-          }
-        }
-        // function for email
-        function validationEmail() {
-          let emailInput = $("#email").val();
-          if (emailInput.match(validRegex)) {
-            $(".invalid-feedback-em").show();
-            $(".empty-feedback-em").hide();
-            $("#email").css("border", "1px solid red");
-            return true;
-          } else {
-            $(".invalid-feedback-em").hide();
-            $("#email").css("border", "1px solid green");
-            return false;
-          }
-
-          // if (emailInput.length == "") {
-          //   $(".empty-feedback-em").show();
-          //   $(".invalid-feedback-em").hide();
-          //   $("#email").css("border", "1px solid red");
-          // } else if (emailInput.test(emailRegex) == true) {
-          //   $(".invalid-feedback-em").show();
-          //   $(".empty-feedback-em").hide();
-          //   $("#email").css("border", "1px solid red");
-          // } else {
-          //   $(".empty-feedback-em").hide();
-          //   $(".invalid-feedback-em").hide();
-          // }
-          // }
-        }
-        // function phone
-        // function validationEmail() {
-        //   let emailInput = $("#email").val();
-        //   if (emailInput.match(validRegex)) {
-        //     $(".invalid-feedback-em").show();
-        //     $(".empty-feedback-em").hide();
-        //     $("#email").css("border", "1px solid red");
-        //     return true;
-        //   } else {
-        //     $(".invalid-feedback-em").hide();
-        //     $("#email").css("border", "1px solid green");
-        //     return false;
-        //   }
-        // }
-      });
-    </script>
   </body>
 </html>
