@@ -24,11 +24,21 @@
         border: 1px solid #eaeaea;
         margin: 10px;
       }
+      .prompt {
+        color: red;
+        padding: 2.5px;
+      }
     </style>
     <script>
       $(document).ready(function () {
         // initiate all variables
         $(".modal").hide();
+        $("#FN").hide();
+        $("#LN").hide();
+        $("#EM").hide();
+        $("#BD").hide();
+        $("#PH").hide();
+        $("#PW").hide();
 
         $("#name").keyup(function () {
           validationFirstName();
@@ -69,9 +79,11 @@
           let letters = /^[A-Za-z, ]+$/;
           if (!valueFN.match(letters) || valueFN.length == "") {
             $("#name").css("border", "1px solid red");
+            $("#FN").show();
             return false;
           } else {
             $("#name").css("border", "1px solid green");
+            $("#FN").hide();
             return true;
           }
         }
@@ -82,9 +94,11 @@
           let letters = /^[A-Za-z, ,.]+$/;
           if (!valueLN.match(letters) || valueLN.length == "") {
             $("#surname").css("border", "1px solid red");
+            $("#LN").show();
             return false;
           } else {
             $("#surname").css("border", "1px solid green");
+            $("#LN").hide();
             return true;
           }
         }
@@ -95,9 +109,11 @@
             /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
           if (!valuepw.match(letters) || valuepw.length == "") {
             $("#pwd").css("border", "1px solid red");
+            $("#PW").show();
             return false;
           } else {
             $("#pwd").css("border", "1px solid green");
+            $("#PW").hide();
             return true;
           }
         }
@@ -106,11 +122,13 @@
           let birthDate = new Date($("#birthday").val());
           let today = new Date();
           let age = today.getFullYear() - birthDate.getFullYear();
-          if (age >= 18 || birthDate.value) {
+          if (age >= 19 || birthDate.value) {
             $("#birthday").css("border", "1px solid green");
+            $("#BD").hide();
             return true;
           } else {
             $("#birthday").css("border", "1px solid red");
+            $("#BD").show();
             return false;
           }
         }
@@ -123,9 +141,11 @@
             emailInput.length == ""
           ) {
             $("#email").css("border", "1px solid red");
+            $("#EM").show();
             return false;
           } else {
             $("#email").css("border", "1px solid green");
+            $("#EM").hide();
             return true;
           }
         }
@@ -136,9 +156,11 @@
             /((\+[0-9]{2})|0)[.\- ]?9[0-9]{2}[.\- ]?[0-9]{3}[.\- ]?[0-9]{4}/;
           if (!valuePhone.match(letters) || valuePhone.length == "") {
             $("#number").css("border", "1px solid red");
+            $("#PH").show();
             return false;
           } else {
             $("#number").css("border", "1px solid green");
+            $("#PH").hide();
             return true;
           }
         }
@@ -157,7 +179,7 @@
             alert("Error input!");
           }
         }
-        
+
         function closeModal() {
           $(".modal").hide();
         }
@@ -172,22 +194,29 @@
           <div class="form-group">
             <label for="name">First Name:</label>
             <input type="text" class="form-control" id="name" required />
+            <p id="FN" class="prompt">Please enter a valid name.</p>
           </div>
           <div class="form-group">
             <label for="surname">Last Name:</label>
             <input type="text" class="form-control" id="surname" required />
+            <p id="LN" class="prompt">Please enter a valid name.</p>
           </div>
           <div class="form-group">
             <label for="email">Email address:</label>
             <input type="email" class="form-control" id="email" required />
+            <p id="EM" class="prompt">Please enter a valid email.</p>
           </div>
           <div class="form-group">
             <label for="birthday">Birthdate:</label>
             <input type="date" class="form-control" id="birthday" required />
+            <p id="BD" class="prompt">
+              You must be 18 years old and above to create an account.
+            </p>
           </div>
           <div class="form-group">
             <label for="number">Phone Number:</label>
             <input type="tel" class="form-control" id="number" required />
+            <p id="PH" class="prompt">Please enter a valid phone number.</p>
           </div>
           <div class="form-group">
             <label for="pwd">Password:</label>
@@ -198,10 +227,11 @@
               id="pwd"
               required
             />
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" /> Remember me</label>
-            <div class="invalid-feedback">Check this checkbox to continue.</div>
+            <p id="PW" class="prompt">
+              Your password must have 8 characters or more, and contain at least
+              one special character, number, uppercase letter, and lowercase
+              letter.
+            </p>
           </div>
           <button
             type="button"
@@ -210,7 +240,7 @@
             data-bs-target="#myModal"
             id="submit-btn"
           >
-            Open modal
+            CREATE ACCOUNT
           </button>
         </form>
         <div class="modal" id="myModal">
