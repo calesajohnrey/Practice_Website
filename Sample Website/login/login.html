@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="login.css" />
+    <script src="login.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <div class="container">
+        <div id="top">
+          <label for="uname"><b>Username</b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="uname"
+            id="username"
+          />
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            id="password"
+          />
+        </div>
+        <button type="submit" id="loginthis" >Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember" /> Remember
+          me
+        </label>
+      </div>
+      <div class="container" id="down">
+        <span>
+          <button type="button" class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span></span
+        >
+      </div>
+    </form>
+  </body>
+  <script>
+    let loginBtn = document.getElementById("loginthis");
+    let input_username = document.getElementById("username").value;
+    let input_password = document.getElementById("password").value;
+    loginBtn.addEventListener("click", click_function);
+    function click_function() {
+        console.log(input_username);
+        console.log(input_password);
+    }
+  </script>
+</html>
