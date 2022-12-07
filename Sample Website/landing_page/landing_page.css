@@ -1,26 +1,26 @@
 * {
-    /* border: 1px solid black; */
-    box-sizing: border-box;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  }
-  html, body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-
-  }
-  body{
-    height: 900px;
-    width: 1200px;
-  }
-  form {
-    border: 3px solid #f1f1f1;
-  }
-  .form{
-    border: 1px solid #ccc
-  }
-  input[type=text], input[type=password] {
+  /* border: 1px solid black; */
+  box-sizing: border-box;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+html,
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+body {
+  height: 900px;
+  width: 1200px;
+}
+form {
+  border: 3px solid #f1f1f1;
+}
+.form {
+  border: 1px solid #ccc;
+}
+input[type="text"], input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -29,7 +29,8 @@
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -48,56 +49,62 @@ button {
   width: 100%;
   opacity: 0.9;
 }
-#buttons{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    gap: 5px;
+#buttons {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 5px;
 }
 
 button:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Extra styles for the cancel button */
-#viewbtn, #createbtn, #updatebtn, #deletebtn {
+#viewbtn,
+#createbtn,
+#updatebtn,
+#deletebtn {
   padding: 14px 20px;
   border-radius: 5px;
 }
-#viewbtn{
-background-color: #00a7ea;
-border: 1px solid #89c3ff;
+#viewbtn {
+  background-color: #00a7ea;
+  border: 1px solid #89c3ff;
 }
 #createbtn {
-    background-color: #8ae800;
-    border: 1px solid #89e077;
-  }
-  #updatebtn {
-    background-color: #faf100;
-    border: 1px solid #ffea7f;
-    color: #555;
-  }
-  #deletebtn {
-    background-color: #FF0061;
-    border: 1px solid #f2626b ;
-  }
+  background-color: #8ae800;
+  border: 1px solid #89e077;
+}
+#updatebtn {
+  background-color: #faf100;
+  border: 1px solid #ffea7f;
+  color: #555;
+}
+#deletebtn {
+  background-color: #ff0061;
+  border: 1px solid #f2626b;
+}
 .container {
   padding: 16px;
 }
 
 .panes {
-    width: 1200px;
+  width: 1200px;
 }
-#left-pane{
-width: 30%;
-margin: 10px;
-} 
+#left-pane {
+  width: 30%;
+  margin: 10px;
+}
 #right-pane {
-    width: 70%;  margin: 10px;
+  width: 70%;
+  margin: 10px;
 }
-table, tr, th, td{
-    width:100%;
-    padding: 10px;
-    border: #ccc 1px solid;
-    
+table,
+tr,
+th,
+td {
+  width: 100%;
+  padding: 10px;
+  border: #ccc 1px solid;
 }
