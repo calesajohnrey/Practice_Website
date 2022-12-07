@@ -1,14 +1,18 @@
 * {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   }
-  body {
+  html, body{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
+
+  }
+  body{
     height: 900px;
+    width: 1200px;
   }
   form {
     border: 3px solid #f1f1f1;
@@ -83,11 +87,14 @@ border: 1px solid #89c3ff;
 }
 #left-pane{
 width: 30%;
+margin: 10px;
 } 
 #right-pane {
-    width: 70%;
+    width: 70%;  margin: 10px;
 }
-table{
+table, tr, th, td{
     width:100%;
     padding: 10px;
+    border: #555 1px solid;
+    
 }
