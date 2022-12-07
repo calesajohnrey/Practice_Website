@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="login.css" />
-    <script src="login.js"></script>
     <title>Document</title>
   </head>
   <body>
-    <form>
+    <form onsubmit="return false">
       <div class="container">
         <div id="top">
           <label for="uname"><b>Username</b></label>
@@ -27,7 +26,7 @@
             id="password"
           />
         </div>
-        <button type="submit" id="loginthis" >Login</button>
+        <button type="submit" id="loginthis">Login</button>
         <label>
           <input type="checkbox" checked="checked" name="remember" /> Remember
           me
@@ -43,12 +42,12 @@
   </body>
   <script>
     let loginBtn = document.getElementById("loginthis");
-    let input_username = document.getElementById("username").value;
-    let input_password = document.getElementById("password").value;
     loginBtn.addEventListener("click", click_function);
     function click_function() {
-        console.log(input_username);
-        console.log(input_password);
+      const input_username = document.getElementById("username").value;
+      const input_password = document.getElementById("password").value;
+      console.log(input_username);
+      console.log(input_password);
     }
   </script>
 </html>

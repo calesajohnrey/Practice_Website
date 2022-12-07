@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="landing_page.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="left-pane" class="panes">
+      <form style="border: 1px solid #ccc">
+        <div class="container">
+          <h1>User's Inventory'</h1>
+          <hr />
+          <label for="name"><b>Name</b></label>
+          <input type="text" placeholder="Name" name="name" required />
+
+          <label for="username"><b>Username</b></label>
+          <input type="password" placeholder="Username" name="psw" required />
+
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Passsword" name="psw" required />
+          <div class="clearfix">
+            <button type="button" id="viewbtn">View Table</button>
+            <div id="buttons">
+                <button type="button" id="createbtn">Create</button>
+                <button type="button" id="updatebtn">Update</button>
+                <button type="button" id="deletebtn">Delete</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="right-pane" class="panes">
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Password</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    let loginBtn = document.getElementById("loginthis");
+    loginBtn.addEventListener("click", click_function);
+    function click_function() {
+      const input_username = document.getElementById("username").value;
+      const input_password = document.getElementById("password").value;
+      console.log(input_username);
+      console.log(input_password);
+    }
+  </script>
+</html>
