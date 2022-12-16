@@ -27,15 +27,9 @@
     
     <div class="row">
       <div class="col-4" style="background-color:darkkhaki;"><br><br>
-
         <h1 align="center">Add new task</h1>
-
-
         <form action="/create-task" method="POST">
-
-          
             <tbody>
-
               <div class="left">
                 <tr>
                   <th>Add Tasks: </th>
@@ -49,7 +43,6 @@
                     </th>
                 </tr>
               </div>
-
               <div class="left">
                 <tr>
                   <th>Categories: </th>
@@ -58,12 +51,10 @@
                       <option>WORK</option>
                       <option>SCHOOL</option>
                       <option>CLEANING</option>
-                      <option>OTHER</option>
-  
+                      <option>OTHER</option>  
                     </select></th>
                 </tr>
               </div>
-
               <div class="left">
                 <tr>
                   <th>Date:</th>
@@ -71,18 +62,11 @@
                     <input type="date" name="date" style="color: grey;" required>
                   </div></th>
                 </tr>
-              </div>
-              
+              </div>            
             </tbody>
-
           <div align="center"><input  type="submit" class="btn1 btn-secondary" id="add" value="ADD TASK"></th></div>
-
         </form>
-
-
       </div>
-
-
       <div class="col-7" style="background-color:rgb(255, 255, 255);">
         <div><br><br>
           <h1 align="center">ToDo Lists</h1>
@@ -97,11 +81,8 @@
                 </tr>
               </thead>
               <% for(let i of task) { %>
-
-
                 <tr>
-
-                  <td> <input type="checkbox" name="<%= i._id %>"></td>
+                <td> <input type="checkbox" name="<%= i._id %>"></td>
                   <td>
                     <p id="task-description" style="color:grey">
                       <%= i.description %>
